@@ -29,7 +29,7 @@ public class Answer implements Comparable<Answer> {
     private String answerSource;
 
     public Answer(){
-        this.answerString = "我还得再想想，以后再告诉你";
+        this.answerString = "知识库没有这个知识,我还得再想想，换一个问题吧";
         ArrayList<Triplet> answerTriplet = new ArrayList<Triplet>();
         this.setAnswerTriplet(answerTriplet);
     }
