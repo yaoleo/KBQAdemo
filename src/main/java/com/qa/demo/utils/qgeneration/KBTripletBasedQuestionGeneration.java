@@ -54,89 +54,142 @@ public class KBTripletBasedQuestionGeneration {
 
     public static HashSet<String> questionTemplates(String s, String p)
     {
-        HashSet<String> specialWordSet = Configuration.SPECIAL_WORD_SET;
+//        HashSet<String> specialWordSet = Configuration.SPECIAL_WORD_SET;
 
         HashSet<String> questionSet = new HashSet<>();
         String question = "";
 
         //使用模板匹配属性和应该生成的问题；
-        if(specialWordSet.contains(p))
+//        if(specialWordSet.contains(p))
+//        {
+//            question = s + "属于哪个" + p + "？";
+//            questionSet.add(question);
+//            question = s + "属于什么" + p + "？";
+//            questionSet.add(question);
+//            question = s + "是什么" + p + "？";
+//            questionSet.add(question);
+//        }
+        if(p.equalsIgnoreCase("关键词"))
         {
-            question = s + "属于哪个" + p + "？";
+            question = s + "的" + p + "是？";
             questionSet.add(question);
-            question = s + "属于什么" + p + "？";
+            question = s + "的" + p + "都有什么？";
             questionSet.add(question);
-            question = s + "是什么" + p + "？";
+            question = s + "的" + p + "是啥？";
+            questionSet.add(question);
+            question = s + "有什么" + p + "？";
+            questionSet.add(question);
+            question = s + "有哪些" + p + "？";
             questionSet.add(question);
         }
-        else if(!p.equalsIgnoreCase("面积")&&p.contains("面积"))
+        else if(p.equalsIgnoreCase("拥有专长"))
         {
+            question = s + "的专长是什么？";
+            questionSet.add(question);
+            question = s + "拥有什么专长？";
+            questionSet.add(question);
+            question = s + "的特长是什么？";
+            questionSet.add(question);
+            question = s + "拥有什么特长？";
+            questionSet.add(question);
+            question = s + "有什么特长？";
+            questionSet.add(question);
+            question = s + "有什么专长？";
+            questionSet.add(question);
+            question = s + "有什么特殊才能？";
+            questionSet.add(question);
+            question = s + "有什么独特的才能？";
+            questionSet.add(question);
+            question = s + "有什么独特的本领？";
+            questionSet.add(question);
+        }
+        else if(p.equalsIgnoreCase("邮箱"))
+        {
+            question = s + "的" + p + "地址是什么？";
+            questionSet.add(question);
+            question = s + "的邮件地址是什么？";
+            questionSet.add(question);
+        }
+        else if(p.equalsIgnoreCase("英文名")||
+                p.equalsIgnoreCase("英文名称"))
+        {
+            question = s + "的英文名是什么？";
+            questionSet.add(question);
+            question = s + "的英文名称是什么？";
+            questionSet.add(question);
+            question = s + "的英文名字是什么？";
+            questionSet.add(question);
+            question = s + "的外文名是什么？";
+            questionSet.add(question);
+            question = s + "的外文名称是什么？";
+            questionSet.add(question);
+            question = s + "的外文名字是什么？";
+            questionSet.add(question);
+        }
+        else if(p.equalsIgnoreCase("父元素"))
+        {
+            question = s + "的父亲元素是什么？";
+            questionSet.add(question);
+        }
+        else if(p.equalsIgnoreCase("h系数"))
+        {
+            question = s + "的h因子是什么？";
+            questionSet.add(question);
+            question = s + "的h因素是什么？";
+            questionSet.add(question);
+        }
+        else if(p.equalsIgnoreCase("总引用量"))
+        {
+            question = s + "的引用总量是什么？";
+            questionSet.add(question);
+            question = s + "的引用量是多少？";
+            questionSet.add(question);
+            question = s + "被引用了多少次？";
+            questionSet.add(question);
+            question = s + "被引用了几次？";
+            questionSet.add(question);
             question = s + "的" + p + "是多少？";
             questionSet.add(question);
-            question = s + "有多少" + p + "？";
+            question = "有多少篇文章引用了" + s + "？";
             questionSet.add(question);
-            question = s + "有多大" + p + "？";
+            question = "引用了" + s + "的文章有多少篇？";
             questionSet.add(question);
-            question = s + "的" + p + "占地多少？";
+            question = s + "被多少篇文章引用过？";
             questionSet.add(question);
-        }
-        else if(p.equalsIgnoreCase("面积"))
-        {
-            question = s + "的" + p + "是多少？";
-            questionSet.add(question);
-            question = s + "有多少" + p + "？";
-            questionSet.add(question);
-            question = s + "有多大" + p + "？";
-            questionSet.add(question);
-            question = s + "占地多少？";
+            question = s + "被多少文章引用了？";
             questionSet.add(question);
         }
-        else if(p.equalsIgnoreCase("分布区域")||p.equalsIgnoreCase("分布"))
+        else if(p.equalsIgnoreCase("中文名")||
+                p.equalsIgnoreCase("中文名称"))
         {
-            question = s + "的主要" + p + "是什么？";
+            question = s + "的中文名是什么？";
             questionSet.add(question);
-            question = s + "的主要" + p + "是哪里？";
+            question = s + "的中文名称是什么？";
             questionSet.add(question);
-            question = s + "的" + p + "是哪里？";
-            questionSet.add(question);
-            question = s + "分布于哪里？";
-            questionSet.add(question);
-            question = s + "分布在哪里？";
-            questionSet.add(question);
-            question = s + "主要分布于哪里？";
-            questionSet.add(question);
-            question = s + "主要分布在哪里？";
-            questionSet.add(question);
-            question = s + "主要分布在哪儿？";
-            questionSet.add(question);
-            question = s + "主要分布在哪？";
-            questionSet.add(question);
-            question = s + "主要分布于什么区域？";
-            questionSet.add(question);
-            question = s + "主要分布于什么地方？";
-            questionSet.add(question);
-            question = s + "分布于什么区域？";
-            questionSet.add(question);
-            question = s + "分布于什么地方？";
-            questionSet.add(question);
-            question = "哪里有" + s + "？";
-            questionSet.add(question);
-            question = "哪里分布有" + s + "？";
+            question = s + "的中文名字是什么？";
             questionSet.add(question);
         }
-        else if(p.equalsIgnoreCase("所属地区"))
+        else if(p.equalsIgnoreCase("外文名")||
+                p.equalsIgnoreCase("外文名称"))
         {
-            question = s + "的" + p + "是哪里？";
+            question = s + "的外文名是什么？";
             questionSet.add(question);
-            question = s + "的" + p + "在哪里？";
+            question = s + "的外文名称是什么？";
             questionSet.add(question);
-            question = s + "的" + p + "在哪儿？";
+            question = s + "的外文名字是什么？";
             questionSet.add(question);
-            question = s + "的" + p + "在哪？";
+        }
+        else if(p.equalsIgnoreCase("工作"))
+        {
+            question = s + "是做什么工作的？";
             questionSet.add(question);
-            question = s + "属于什么地区？";
+            question = s + "从事什么工作？";
             questionSet.add(question);
-            question = s + "属于哪个地区？";
+            question = s + "的" + p + "内容是什么？";
+            questionSet.add(question);
+            question = s + "的" + p + "职责是什么？";
+            questionSet.add(question);
+            question = "什么是" + s + "的" + p + "？";
             questionSet.add(question);
         }
         else if(p.equalsIgnoreCase("描述"))
@@ -151,26 +204,210 @@ public class KBTripletBasedQuestionGeneration {
             questionSet.add(question);
             question = "怎么描述" + s + "？";
             questionSet.add(question);
+            question = "如何描述" + s + "？";
+            questionSet.add(question);
         }
-        else if(p.equalsIgnoreCase("二名法"))
+        else if(p.equalsIgnoreCase("个人主页"))
         {
-            question = s + "的" + p + "命名是什么？";
+            question = s + "的个人主页地址是什么？";
             questionSet.add(question);
-            question = s + "的" + p + "命名名称是什么？";
+            question = s + "的个人主页链接是什么？";
             questionSet.add(question);
-            question = s + "的" + p + "名称是什么？";
+            question = s + "的主页超链接是什么？";
             questionSet.add(question);
-            question = s + "用" + p + "怎么命名？";
+            question = s + "的主页连接是什么？";
             questionSet.add(question);
-            question = "用" + p + "怎么命名" + s +"？";
+        }
+        else if(p.equalsIgnoreCase("ID"))
+        {
+            question = s + "的" + p + "是多少？";
             questionSet.add(question);
-            question = "如何用" + p + "命名" + s +"？";
+            question = s + "的" + p + "值是多少？";
             questionSet.add(question);
-            question = "怎么用" + p + "命名" + s +"？";
+            question = s + "的" + p + "值是什么？";
             questionSet.add(question);
-            question = p + "命名" + s + "的方式？";
+        }
+        else if(p.equalsIgnoreCase("活动"))
+        {
+            question = s + "的主要" + p + "是什么？";
             questionSet.add(question);
-            question = p + "命名" + s + "的方式是什么？";
+        }
+        else if(p.equalsIgnoreCase("文章"))
+        {
+            question = s + "的主要" + p + "是什么？";
+            questionSet.add(question);
+            question = s + "的" + p + "有哪些？";
+            questionSet.add(question);
+            question = s + "发表的" + p + "有哪些？";
+            questionSet.add(question);
+            question = s + "写作的" + p + "有哪些？";
+            questionSet.add(question);
+            question = s + "发表了哪些" + p + "？";
+            questionSet.add(question);
+            question = s + "发表了什么" + p + "？";
+            questionSet.add(question);
+            question = s + "有哪些著作？";
+            questionSet.add(question);
+            question = s + "有什么学术著作？";
+            questionSet.add(question);
+            question = s + "有哪些作品？";
+            questionSet.add(question);
+            question = s + "有什么学术作品？";
+            questionSet.add(question);
+            question = s + "发表了哪些作品？";
+            questionSet.add(question);
+            question = s + "出版了什么书？";
+            questionSet.add(question);
+            question = s + "出了什么书？";
+            questionSet.add(question);
+        }
+        else if(p.equalsIgnoreCase("图片"))
+        {
+            question = s + "的" + p + "地址是什么？";
+            questionSet.add(question);
+            question = s + "的" + p + "链接是什么？";
+            questionSet.add(question);
+            question = s + "的" + p + "连接是什么？";
+            questionSet.add(question);
+            question = s + "的" + p + "超链接是什么？";
+            questionSet.add(question);
+        }
+        else if(p.equalsIgnoreCase("中文简介")||p.equalsIgnoreCase("中文描述"))
+        {
+            question = s + "的中文简明介绍是什么？";
+            questionSet.add(question);
+            question = s + "的中文简单介绍是什么？";
+            questionSet.add(question);
+            question = "用中文简单介绍一下" + s + "是什么？";
+            questionSet.add(question);
+            question = "简明介绍一下" + s + "？";
+            questionSet.add(question);
+            question = "用中文简单描述一下" + s + "？";
+            questionSet.add(question);
+            question = s + "的基本介绍是什么？";
+            questionSet.add(question);
+            question = s + "的基本情况是什么？";
+            questionSet.add(question);
+            question = "对" + s + "做一个中文的概述？";
+            questionSet.add(question);
+            question = "对" + s + "做一个中文的简单介绍？";
+            questionSet.add(question);
+            question = "对" + s + "做一下中文的简单描述？";
+            questionSet.add(question);
+        }
+        else if(p.equalsIgnoreCase("简介")||p.equalsIgnoreCase("描述"))
+        {
+            question = s + "的简明介绍是什么？";
+            questionSet.add(question);
+            question = s + "的简单介绍是什么？";
+            questionSet.add(question);
+            question = "用简单介绍一下" + s + "是什么？";
+            questionSet.add(question);
+            question = "简明介绍一下" + s + "？";
+            questionSet.add(question);
+            question = "用简单描述一下" + s + "？";
+            questionSet.add(question);
+            question = s + "的基本介绍是什么？";
+            questionSet.add(question);
+            question = s + "的基本情况是什么？";
+            questionSet.add(question);
+            question = "对" + s + "做一个概述？";
+            questionSet.add(question);
+            question = "对" + s + "做一个简单介绍？";
+            questionSet.add(question);
+            question = "对" + s + "做一下简单描述？";
+            questionSet.add(question);
+        }
+        else if(p.equalsIgnoreCase("个人自传"))
+        {
+            question = s + "的自传是什么？";
+            questionSet.add(question);
+            question = s + "个人的自传是什么？";
+            questionSet.add(question);
+            question = s + "的自传？";
+            questionSet.add(question);
+        }
+        else if(p.equalsIgnoreCase("子元素"))
+        {
+            question = s + "的孩子元素是什么？";
+            questionSet.add(question);
+        }
+        else if(p.equalsIgnoreCase("类型"))
+        {
+            question = s + "是属于什么" + p + "的？";
+            questionSet.add(question);
+            question = s + "属于什么" + p + "？";
+            questionSet.add(question);
+            question = s + "分类于哪个类别？";
+            questionSet.add(question);
+            question = s + "属于什么类别？";
+            questionSet.add(question);
+            question = s + "是属于哪个" + p + "的？";
+            questionSet.add(question);
+        }
+        else if(p.equalsIgnoreCase("国籍"))
+        {
+            question = s + "是哪国人？";
+            questionSet.add(question);
+            question = s + "来自哪个国家？";
+            questionSet.add(question);
+        }
+        else if(p.equalsIgnoreCase("论文数量"))
+        {
+            question = s + "发表了多少文章？";
+            questionSet.add(question);
+            question = s + "发表了多少论文？";
+            questionSet.add(question);
+            question = s + "的" + p + "是多少？";
+            questionSet.add(question);
+            question = s + "发表的论文数量有多少？";
+            questionSet.add(question);
+            question = s + "发表的论文数目有多少？";
+            questionSet.add(question);
+            question = s + "发表了多少著作？";
+            questionSet.add(question);
+            question = s + "发表了多少学术著作？";
+            questionSet.add(question);
+            question = s + "发表了多少作品？";
+            questionSet.add(question);
+            question = s + "发表了多少学术作品？";
+            questionSet.add(question);
+        }
+        else if(p.equalsIgnoreCase("产品供应商"))
+        {
+            question = s + "的" + p + "是哪个公司？";
+            questionSet.add(question);
+            question = s + "的" + p + "是哪家单位？";
+            questionSet.add(question);
+            question = s + "的" + p + "是什么机构？";
+            questionSet.add(question);
+        }
+        else if(p.equalsIgnoreCase("机构"))
+        {
+            question = s + "的所属单位是哪家" + p + "？";
+            questionSet.add(question);
+            question = s + "属于哪个" + p + "？";
+            questionSet.add(question);
+            question = s + "的所属单位是什么？";
+            questionSet.add(question);
+            question = s + "属于哪所科研机构？";
+            questionSet.add(question);
+        }
+        else if(p.equalsIgnoreCase("作者"))
+        {
+            question = s + "的" + p + "是谁？";
+            questionSet.add(question);
+            question = "谁创作了" + s + "？";
+            questionSet.add(question);
+            question = "谁写了" + s + "？";
+            questionSet.add(question);
+            question = "谁写作了" + s + "？";
+            questionSet.add(question);
+            question = "谁发表了" + s + "？";
+            questionSet.add(question);
+            question = "谁撰写了" + s + "？";
+            questionSet.add(question);
+            question = "谁撰文了" + s + "？";
             questionSet.add(question);
         }
         else if(p.equalsIgnoreCase("别名")||p.equalsIgnoreCase("别称"))
@@ -249,13 +486,6 @@ public class KBTripletBasedQuestionGeneration {
             question = s + "去世于哪天？";
             questionSet.add(question);
         }
-        else if(p.equalsIgnoreCase("国籍"))
-        {
-            question = s + "是哪国人？";
-            questionSet.add(question);
-            question = s + "来自哪个国家？";
-            questionSet.add(question);
-        }
         else if(p.equalsIgnoreCase("民族"))
         {
             question = s + "是什么" + p + "？";
@@ -311,59 +541,6 @@ public class KBTripletBasedQuestionGeneration {
             question = s + "的" + p + "在哪？";
             questionSet.add(question);
         }
-        else if(p.equalsIgnoreCase("花（果）期"))
-        {
-            question = s + "的" + p + "是什么时候？";
-            questionSet.add(question);
-            question = s + "的花期是什么？";
-            questionSet.add(question);
-            question = s + "的果期是什么？";
-            questionSet.add(question);
-            question = s + "的花期？";
-            questionSet.add(question);
-            question = s + "的果期？";
-            questionSet.add(question);
-            question = s + "的花期是什么时候？";
-            questionSet.add(question);
-            question = s + "的果期是什么时候？";
-            questionSet.add(question);
-            question = s + "的花果期是什么？";
-            questionSet.add(question);
-            question = s + "的花果期？";
-            questionSet.add(question);
-            question = s + "的花果期是什么时候？";
-            questionSet.add(question);
-        }
-        else if(p.equalsIgnoreCase("中文名")||
-                p.equalsIgnoreCase("中文名称"))
-        {
-            question = s + "的中文名是什么？";
-            questionSet.add(question);
-            question = s + "的中文名称是什么？";
-            questionSet.add(question);
-            question = s + "的中文名字是什么？";
-            questionSet.add(question);
-        }
-        else if(p.equalsIgnoreCase("英文名")||
-                p.equalsIgnoreCase("英文名称"))
-        {
-            question = s + "的英文名是什么？";
-            questionSet.add(question);
-            question = s + "的英文名称是什么？";
-            questionSet.add(question);
-            question = s + "的英文名字是什么？";
-            questionSet.add(question);
-        }
-        else if(p.equalsIgnoreCase("外文名")||
-                p.equalsIgnoreCase("外文名称"))
-        {
-            question = s + "的外文名是什么？";
-            questionSet.add(question);
-            question = s + "的外文名称是什么？";
-            questionSet.add(question);
-            question = s + "的外文名字是什么？";
-            questionSet.add(question);
-        }
         else if(p.equalsIgnoreCase("命名人")||
                 p.equalsIgnoreCase("命名者"))
         {
@@ -386,36 +563,6 @@ public class KBTripletBasedQuestionGeneration {
             question = "谁命名了" + s + "？";
             questionSet.add(question);
         }
-        else if(p.equalsIgnoreCase("物种命名人")||
-                p.equalsIgnoreCase("物种命名者"))
-        {
-            question = s + "的命名人是什么？";
-            questionSet.add(question);
-            question = s + "的命名人是谁？";
-            questionSet.add(question);
-            question = s + "的命名者是什么？";
-            questionSet.add(question);
-            question = s + "的命名者是谁？";
-            questionSet.add(question);
-            question = s + "的物种命名人是什么？";
-            questionSet.add(question);
-            question = s + "的物种命名人是谁？";
-            questionSet.add(question);
-            question = s + "的物种命名者是什么？";
-            questionSet.add(question);
-            question = s + "的物种命名者是谁？";
-            questionSet.add(question);
-            question = s + "的物种命名人？";
-            questionSet.add(question);
-            question = s + "的物种命名者？";
-            questionSet.add(question);
-            question = s + "由谁命名？";
-            questionSet.add(question);
-            question = s + "是谁命名的？";
-            questionSet.add(question);
-            question = "谁命名了" + s + "这个物种？";
-            questionSet.add(question);
-        }
         else if(p.equalsIgnoreCase("译者"))
         {
             question = s + "的" + p + "是谁？";
@@ -427,76 +574,6 @@ public class KBTripletBasedQuestionGeneration {
             question = "谁翻译了" + s + "？";
             questionSet.add(question);
         }
-        else if(p.equalsIgnoreCase("危害作物")||
-                p.equalsIgnoreCase("主要危害作物"))
-        {
-            question = s + "的危害作物是什么？";
-            questionSet.add(question);
-            question = s + "的主要危害作物是什么？";
-            questionSet.add(question);
-            question = s + "危害了哪些作物？";
-            questionSet.add(question);
-            question = s + "主要危害了哪些作物？";
-            questionSet.add(question);
-            question = s + "危害了什么作物？";
-            questionSet.add(question);
-            question = s + "主要危害了什么作物？";
-            questionSet.add(question);
-            question = "哪些作物被" + s + "危害？";
-            questionSet.add(question);
-            question = "哪些作物被" + s + "危害了？";
-            questionSet.add(question);
-            question = "哪些作物被" + s + "所危害？";
-            questionSet.add(question);
-        }
-        else if(p.equalsIgnoreCase("主要为害部位")||
-                p.equalsIgnoreCase("为害部位")||
-                p.equalsIgnoreCase("危害部位"))
-        {
-            question = s + "的危害部位是什么？";
-            questionSet.add(question);
-            question = s + "的为害部位是什么？";
-            questionSet.add(question);
-            question = s + "的主要危害部位是什么？";
-            questionSet.add(question);
-            question = s + "的主要为害部位是什么？";
-            questionSet.add(question);
-            question = s + "为害了哪些部位？";
-            questionSet.add(question);
-            question = s + "主要为害哪些部位？";
-            questionSet.add(question);
-            question = s + "危害了哪些部位？";
-            questionSet.add(question);
-            question = s + "主要危害哪些部位？";
-            questionSet.add(question);
-            question = s + "的为害部位是哪里？";
-            questionSet.add(question);
-            question = s + "的为害部位是哪儿？";
-            questionSet.add(question);
-            question = s + "的为害部位是哪？";
-            questionSet.add(question);
-            question = s + "的主要为害部位是哪里？";
-            questionSet.add(question);
-            question = s + "的危害部位是哪里？";
-            questionSet.add(question);
-            question = s + "的主要危害部位是哪里？";
-            questionSet.add(question);
-            question = "哪些部位被" + s + "所危害？";
-            questionSet.add(question);
-            question = "哪些部位被" + s + "危害？";
-            questionSet.add(question);
-            question = "哪些部位被" + s + "危害了？";
-            questionSet.add(question);
-        }
-        else if(p.equalsIgnoreCase("人口"))
-        {
-            question = s + "的" + p + "是多少？";
-            questionSet.add(question);
-            question = s + "有多少" + p +"？";
-            questionSet.add(question);
-            question = s + "有多少人？";
-            questionSet.add(question);
-        }
         else if(p.equalsIgnoreCase("发现者"))
         {
             question = "谁发现了" + s + "？";
@@ -506,68 +583,6 @@ public class KBTripletBasedQuestionGeneration {
             question = s + "由谁发现的？";
             questionSet.add(question);
             question = s + "的" + p + "是谁？";
-            questionSet.add(question);
-        }
-        else if(p.equalsIgnoreCase("营养成分")||
-                p.equalsIgnoreCase("主要营养成分"))
-        {
-            question = s + "的营养成分是什么？";
-            questionSet.add(question);
-            question = s + "的主要营养成分是什么？";
-            questionSet.add(question);
-            question = s + "有什么营养成分？";
-            questionSet.add(question);
-            question = s + "有哪些营养成分？";
-            questionSet.add(question);
-            question = s + "有什么营养？";
-            questionSet.add(question);
-            question = s + "有哪些营养？";
-            questionSet.add(question);
-            question = s + "有什么主要营养成分？";
-            questionSet.add(question);
-            question = s + "有哪些主要营养成分？";
-            questionSet.add(question);
-            question = s + "的营养成分有哪些？";
-            questionSet.add(question);
-            question = s + "的营养有哪些？";
-            questionSet.add(question);
-        }
-        else if(p.equalsIgnoreCase("PH"))
-        {
-            question = s + "的" + p + "是多少？";
-            questionSet.add(question);
-            question = s + "的" + p + "值是多少？";
-            questionSet.add(question);
-            question = s + "的" + p + "值是什么？";
-            questionSet.add(question);
-            question = "适合" + s + "的" + p + "值是什么？";
-            questionSet.add(question);
-            question = "适合" + s + "的" + p + "值是多少？";
-            questionSet.add(question);
-            question = s + "适合的" + p + "值是多少？";
-            questionSet.add(question);
-            question = s + "适合的" + p + "值是什么？";
-            questionSet.add(question);
-        }
-        else if(p.equalsIgnoreCase("水温"))
-        {
-            question = s + "的" + p + "是多少？";
-            questionSet.add(question);
-            question = s + "的适宜" + p + "是什么？";
-            questionSet.add(question);
-            question = s + "的适宜" + p + "是多少？";
-            questionSet.add(question);
-            question = "适合" + s + "的" + p + "是什么？";
-            questionSet.add(question);
-            question = "适合" + s + "的" + p + "是多少？";
-            questionSet.add(question);
-            question = s + "适合的" + p + "是多少？";
-            questionSet.add(question);
-            question = s + "适合的" + p + "是什么？";
-            questionSet.add(question);
-            question = "对于" + s + "合适的" + p + "？";
-            questionSet.add(question);
-            question = s + "适合的水的温度？";
             questionSet.add(question);
         }
         else if(p.equalsIgnoreCase("数量"))
@@ -587,55 +602,6 @@ public class KBTripletBasedQuestionGeneration {
             question = s + "的" + p + "在哪？";
             questionSet.add(question);
             question = s + "的" + p + "在哪儿？";
-            questionSet.add(question);
-        }
-        else if(p.equalsIgnoreCase("作者"))
-        {
-            question = s + "的" + p + "是谁？";
-            questionSet.add(question);
-            question = "谁创作了" + s + "？";
-            questionSet.add(question);
-            question = "谁写了" + s + "？";
-            questionSet.add(question);
-        }
-        else if(p.equalsIgnoreCase("预防措施"))
-        {
-            question = s + "的" + p + "有哪些？";
-            questionSet.add(question);
-            question = "怎么预防" + s + "？";
-            questionSet.add(question);
-            question = "如何预防" + s + "？";
-            questionSet.add(question);
-            question = "有什么预防" + s + "的方法？";
-            questionSet.add(question);
-            question = "有哪些预防" + s + "的方法？";
-            questionSet.add(question);
-            question = "有什么预防" + s + "的措施？";
-            questionSet.add(question);
-            question = "有哪些预防" + s + "的措施？";
-            questionSet.add(question);
-            question = "有什么方法预防" + s + "？";
-            questionSet.add(question);
-            question = "有哪些方法预防" + s + "？";
-            questionSet.add(question);
-            question = "有什么措施预防" + s + "？";
-            questionSet.add(question);
-            question = "有哪些措施预防" + s + "？";
-            questionSet.add(question);
-        }
-        else if(p.equalsIgnoreCase("传播途径"))
-        {
-            question = s + "的" + p + "有哪些？";
-            questionSet.add(question);
-            question = "通过什么途径可以传播" + s + "？";
-            questionSet.add(question);
-            question = "通过什么途径能传播" + s + "？";
-            questionSet.add(question);
-            question = "有什么途径传播" + s + "？";
-            questionSet.add(question);
-            question = "有哪些途径传播" + s + "？";
-            questionSet.add(question);
-            question = s + "通过哪些途径传播？";
             questionSet.add(question);
         }
         else if(p.equalsIgnoreCase("邮编区码")||
@@ -678,19 +644,6 @@ public class KBTripletBasedQuestionGeneration {
             question = s + "被谁" + p + "了？";
             questionSet.add(question);
         }
-        else if(p.equalsIgnoreCase("药用部位"))
-        {
-            question = s + "的" + p + "是哪里？";
-            questionSet.add(question);
-            question = s + "的" + p + "是哪？";
-            questionSet.add(question);
-            question = s + "的" + p + "是哪儿？";
-            questionSet.add(question);
-            question = "在哪里对" + s + "用药？" ;
-            questionSet.add(question);
-            question = "在哪些部位对" + s + "用药？" ;
-            questionSet.add(question);
-        }
         else if(p.equalsIgnoreCase("总部地点")||
                 p.equalsIgnoreCase("总部所在地"))
         {
@@ -715,38 +668,6 @@ public class KBTripletBasedQuestionGeneration {
             question = s + "的总部地点在哪？";
             questionSet.add(question);
         }
-        else if(p.equalsIgnoreCase("功效")||
-                p.equalsIgnoreCase("主要功效"))
-        {
-            question = s + "的" + p + "有哪些？";
-            questionSet.add(question);
-            question = s + "有什么" + p + "？";
-            questionSet.add(question);
-            question = s + "有哪些" + p + "？";
-            questionSet.add(question);
-            question = s + "有哪些效果？";
-            questionSet.add(question);
-            question = s + "有什么效果？";
-            questionSet.add(question);
-            question = s + "有哪些作用？";
-            questionSet.add(question);
-            question = s + "有什么作用？";
-            questionSet.add(question);
-            question = s + "有哪些功用？";
-            questionSet.add(question);
-            question = s + "有什么功用？";
-            questionSet.add(question);
-        }
-        else if(p.equalsIgnoreCase("副作用"))
-        {
-            question = s + "的" + p + "有哪些？";
-            questionSet.add(question);
-            question = s + "有什么" + p + "？";
-            questionSet.add(question);
-            question = s + "有哪些" + p + "？";
-            questionSet.add(question);
-        }
-
         else if(p.equalsIgnoreCase("起源于"))
         {
             question = s + p + "什么？";
@@ -854,20 +775,6 @@ public class KBTripletBasedQuestionGeneration {
             question = s + "有几个员工？";
             questionSet.add(question);
         }
-        else if(p.equalsIgnoreCase("主产地"))
-        {
-            question = s + "的主产地方是什么？";
-            questionSet.add(question);
-        }
-        else if(p.equalsIgnoreCase("气门数"))
-        {
-            question = s + "的气门有多少？";
-            questionSet.add(question);
-            question = s + "的" + p + "有多少？";
-            questionSet.add(question);
-            question = s + "有多少气门？";
-            questionSet.add(question);
-        }
         else if(p.equalsIgnoreCase("逝世地"))
         {
             question = s + "的" + p + "是哪里？";
@@ -957,11 +864,6 @@ public class KBTripletBasedQuestionGeneration {
             question = s + "多少钱？";
             questionSet.add(question);
         }
-        else if(p.equalsIgnoreCase("诗名"))
-        {
-            question = s + "的诗的名字是什么？";
-            questionSet.add(question);
-        }
         else if(p.equalsIgnoreCase("所处时代")||
                 p.equalsIgnoreCase("所处年代"))
         {
@@ -976,18 +878,6 @@ public class KBTripletBasedQuestionGeneration {
             question = s + "的所处时代？";
             questionSet.add(question);
             question = s + "的所处年代？";
-            questionSet.add(question);
-        }
-        else if(p.equalsIgnoreCase("性味与归经")||
-                p.equalsIgnoreCase("性味归经"))
-        {
-            question = s + "的性味与归经？";
-            questionSet.add(question);
-            question = s + "的性味归经？";
-            questionSet.add(question);
-            question = s + "的性味归经是什么？";
-            questionSet.add(question);
-            question = s + "的性味与归经是什么？";
             questionSet.add(question);
         }
         else if(p.equalsIgnoreCase("成就")) {
@@ -1014,121 +904,6 @@ public class KBTripletBasedQuestionGeneration {
             question = s + "提供了什么" + p + "？";
             questionSet.add(question);
         }
-        else if(p.equalsIgnoreCase("保存方法"))
-        {
-            question = "怎么保存" + s + "？";
-            questionSet.add(question);
-            question = "怎么储存" + s + "？";
-            questionSet.add(question);
-            question = "如何保存" + s + "？";
-            questionSet.add(question);
-            question = "如何储存" + s + "？";
-            questionSet.add(question);
-            question = "保存" + s + "的方法是什么？";
-            questionSet.add(question);
-            question = "储存" + s + "的方式是什么？";
-            questionSet.add(question);
-            question = "怎么保藏" + s + "？";
-            questionSet.add(question);
-            question = "怎么储藏" + s + "？";
-            questionSet.add(question);
-        }
-        else if(p.equalsIgnoreCase("冬剪技术"))
-        {
-            question = s + "的冬剪方法是什么？";
-            questionSet.add(question);
-            question = "怎么修剪" + s + "？";
-            questionSet.add(question);
-            question = "如何修剪" + s + "？";
-            questionSet.add(question);
-            question = "怎么在冬天修剪" + s + "？";
-            questionSet.add(question);
-            question = "如何在冬季修剪" + s + "？";
-            questionSet.add(question);
-            question = "怎么对" + s + "进行冬剪？";
-            questionSet.add(question);
-            question = "怎么对" + s + "冬剪？";
-            questionSet.add(question);
-            question = "怎么冬剪" + s + "？";
-            questionSet.add(question);
-            question = s + "怎么进行冬剪？";
-            questionSet.add(question);
-        }
-        else if(p.equalsIgnoreCase("发病规律"))
-        {
-            question = s + "发病的规律是什么？";
-            questionSet.add(question);
-            question = s + "发生的一般规律是什么？";
-            questionSet.add(question);
-            question = s + "发展的规律是什么？";
-            questionSet.add(question);
-        }
-        else if(p.equalsIgnoreCase("发生原因"))
-        {
-            question = s + "发生的原因是什么？";
-            questionSet.add(question);
-            question = s + "发生的主要原因是什么？";
-            questionSet.add(question);
-            question = "怎么会发生" + s + "的？";
-            questionSet.add(question);
-        }
-        else if(p.equalsIgnoreCase("防治措施"))
-        {
-            question = "怎么防治" + s + "？";
-            questionSet.add(question);
-            question = "采取什么措施能防治" + s + "？";
-            questionSet.add(question);
-            question = "如何治疗" + s + "？";
-            questionSet.add(question);
-            question = "怎么预防" + s + "？";
-            questionSet.add(question);
-            question = "采取什么方法能防治" + s + "？";
-            questionSet.add(question);
-            question = s + "的防治方法是什么？";
-            questionSet.add(question);
-            question = s + "的防治办法是什么？";
-            questionSet.add(question);
-        }
-        else if(p.equalsIgnoreCase("简介"))
-        {
-            question = s + "的简明介绍是什么？";
-            questionSet.add(question);
-            question = s + "的简单介绍是什么？";
-            questionSet.add(question);
-            question = s + "是什么？";
-            questionSet.add(question);
-            question = "简单介绍一下" + s + "是什么？";
-            questionSet.add(question);
-            question = "简明介绍一下" + s + "？";
-            questionSet.add(question);
-            question = "简单描述一下" + s + "？";
-            questionSet.add(question);
-            question = s + "的基本介绍是什么？";
-            questionSet.add(question);
-            question = s + "的基本情况是什么？";
-            questionSet.add(question);
-            question = "对" + s + "做一个概述？";
-            questionSet.add(question);
-            question = "对" + s + "做一个简单介绍？";
-            questionSet.add(question);
-            question = "对" + s + "做一下简单描述？";
-            questionSet.add(question);
-            question = s + "是什么东西？";
-            questionSet.add(question);
-            question = "说一下" + s + "是什么吧？";
-            questionSet.add(question);
-            question = "说一下" + s + "是什么东西吧？";
-            questionSet.add(question);
-        }
-        else if(p.equalsIgnoreCase("配制方法"))
-        {
-            question = "怎么配制" + s + "？";
-            questionSet.add(question);
-            question = "采取什么方法能配制" + s + "？";
-            questionSet.add(question);
-            question = "如何配制" + s + "？";
-            questionSet.add(question);
-        }
         else if(p.equalsIgnoreCase("缺点"))
         {
             question = s + "的缺陷是什么？";
@@ -1144,96 +919,6 @@ public class KBTripletBasedQuestionGeneration {
             question = s + "有什么不好之处？";
             questionSet.add(question);
         }
-        else if(p.equalsIgnoreCase("施肥方法"))
-        {
-            question = "怎么对" + s + "施肥？";
-            questionSet.add(question);
-            question = "采取什么方法能施肥" + s + "？";
-            questionSet.add(question);
-            question = "如何对" + s + "上肥料？";
-            questionSet.add(question);
-            question = "如何对" + s + "施肥料？";
-            questionSet.add(question);
-        }
-        else if(p.equalsIgnoreCase("识别方法"))
-        {
-            question = "怎么识别" + s + "？";
-            questionSet.add(question);
-            question = "如何鉴别" + s + "？";
-            questionSet.add(question);
-            question = "如何甄别" + s + "？";
-            questionSet.add(question);
-            question = s + "的鉴别方法是什么？";
-            questionSet.add(question);
-        }
-        else if(p.equalsIgnoreCase("食用方法"))
-        {
-            question = "怎么食用" + s + "？";
-            questionSet.add(question);
-            question = "怎么吃" + s + "？";
-            questionSet.add(question);
-            question = "如何食用" + s + "？";
-            questionSet.add(question);
-        }
-        else if(p.equalsIgnoreCase("使用方法"))
-        {
-            question = "怎么使用" + s + "？";
-            questionSet.add(question);
-            question = "如何使用" + s + "？";
-            questionSet.add(question);
-            question = "怎么用" + s + "？";
-            questionSet.add(question);
-        }
-        else if(p.equalsIgnoreCase("危害"))
-        {
-            question = s + "对人有什么坏处？";
-            questionSet.add(question);
-            question = s + "是否对人有害？";
-            questionSet.add(question);
-            question = s + "对人有什么危害？";
-            questionSet.add(question);
-            question = s + "对人有什么不良影响？";
-            questionSet.add(question);
-            question = s + "对人有什么不好的地方？";
-            questionSet.add(question);
-            question = s + "的害处是什么？";
-            questionSet.add(question);
-        }
-        else if(p.equalsIgnoreCase("修剪时间"))
-        {
-            question = "何时修剪" + s + "合适？";
-            questionSet.add(question);
-            question = "应该什么时候修剪" + s + "？";
-            questionSet.add(question);
-            question = "什么季节修剪" + s + "最好？";
-            questionSet.add(question);
-        }
-        else if(p.equalsIgnoreCase("养殖方法"))
-        {
-            question = "怎么养殖" + s + "？";
-            questionSet.add(question);
-            question = "如何养" + s + "？";
-            questionSet.add(question);
-        }
-        else if(p.equalsIgnoreCase("栽培技术"))
-    {
-        question = "怎么栽培" + s + "？";
-        questionSet.add(question);
-        question = "如何种植" + s + "？";
-        questionSet.add(question);
-        question = "如何养植" + s + "？";
-        questionSet.add(question);
-        question = "如何培育" + s + "？";
-        questionSet.add(question);
-        question = s + "的栽培方法是什么？";
-        questionSet.add(question);
-        question = s + "的栽培技术是什么？";
-        questionSet.add(question);
-        question = s + "的养植方法是什么？";
-        questionSet.add(question);
-        question = s + "的培育技术是什么？";
-        questionSet.add(question);
-    }
         //问题的默认两种问法；
         question = s + "的" + p + "？";
         questionSet.add(question);
