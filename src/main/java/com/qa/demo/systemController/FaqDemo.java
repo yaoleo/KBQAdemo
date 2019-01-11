@@ -35,16 +35,14 @@ public class FaqDemo {
     public static void main(String[] args) throws IOException {
 
         PropertyConfigurator.configure(LOG_PROPERTY);
-        //系统初始化操作：es建立索引
-        //SYNONYM为分词之后的模板；
-        IndexFile.indexFaqData(DataSource.SYNONYM);
-        //为19000条百科知识的索引；
-        IndexFile.indexEncyclopediaData(DataSource.ENCYCLOPEDIA);
-        //FAQ为常用问答对的索引；PATTERN为模板的索引;FAQ_T为生成的所有问题的模板；
-//      IndexFile.indexFaqData(DataSource.FAQ, DataSource.PATTERN, DataSource.FAQ_T);
-        IndexFile.indexFaqData(DataSource.FAQ, DataSource.PATTERN);
-//      IndexFile.indexFaqData(DataSource.FAQ);
-        LOG.info(" [info]已建立faq索引！");
+//        //系统初始化操作：es建立索引
+//        //SYNONYM为分词之后的模板；
+//        IndexFile.indexFaqData(DataSource.SYNONYM);
+//        //为19000条百科知识的索引；
+//        IndexFile.indexEncyclopediaData(DataSource.ENCYCLOPEDIA);
+//        //FAQ为常用问答对的索引；PATTERN为模板的索引;FAQ_T为生成的所有问题的模板；
+//        IndexFile.indexFaqData(DataSource.FAQ, DataSource.PATTERN);
+//        LOG.info(" [info]已建立faq索引！");
 
         TDBCrudDriver tdbCrudDriver = new TDBCrudDriverImpl();
         tdbCrudDriver.loadTDBModel();
@@ -71,34 +69,34 @@ public class FaqDemo {
             KbqaQueryDriver ALGQuerySynonymKBQADriver = new ALGQuerySynonymKBQA();
             question = ALGQuerySynonymKBQADriver.kbQueryAnswers(question);
 
-            //从ES索引的模板库中匹配模板（模板分词之后形成的关键词组合），并形成查询三元组，最终通过KG三元组匹配得到候选答案;
-            KbqaQueryDriver esQuerySynonymKBQADriver = new ESQuerySynonymKBQA();
-            question = esQuerySynonymKBQADriver.kbQueryAnswers(question);
+//            //从ES索引的模板库中匹配模板（模板分词之后形成的关键词组合），并形成查询三元组，最终通过KG三元组匹配得到候选答案;
+//            KbqaQueryDriver esQuerySynonymKBQADriver = new ESQuerySynonymKBQA();
+//            question = esQuerySynonymKBQADriver.kbQueryAnswers(question);
 
-            //从ES索引的模板库中匹配模板（从自然问句中将实体去掉后的模板），并形成查询三元组，最终通过KG三元组匹配得到候选答案;
-            QueryPatternKBQA queryPatternKBQA = new QueryPatternKBQA();
-            question = queryPatternKBQA.kbQueryAnswers(question);
+//            //从ES索引的模板库中匹配模板（从自然问句中将实体去掉后的模板），并形成查询三元组，最终通过KG三元组匹配得到候选答案;
+//            QueryPatternKBQA queryPatternKBQA = new QueryPatternKBQA();
+//            question = queryPatternKBQA.kbQueryAnswers(question);
 
-            //从ES中检索faq;
-            QueryFaq queryFaq = new QueryFaq();
-//            question = queryFaq.search(question, DbqaQueryDriver.QueryType.MATCH_PHRASE_QUERY, DataSource.FAQ_T, DataSource.FAQ);
-            question = queryFaq.search(question, DbqaQueryDriver.QueryType.MATCH_PHRASE_QUERY, DataSource.FAQ);
+//            //从ES中检索faq;
+//            QueryFaq queryFaq = new QueryFaq();
+////            question = queryFaq.search(question, DbqaQueryDriver.QueryType.MATCH_PHRASE_QUERY, DataSource.FAQ_T, DataSource.FAQ);
+//            question = queryFaq.search(question, DbqaQueryDriver.QueryType.MATCH_PHRASE_QUERY, DataSource.FAQ);
 
-            //从ES中索引的百科知识检索faq;
-            QueryEncyclopedia queryEncyclopedia = new QueryEncyclopedia();
-            question = queryEncyclopedia.search(question, DbqaQueryDriver.QueryType.MATCH_PHRASE_QUERY, DataSource.ENCYCLOPEDIA);
+//            //从ES中索引的百科知识检索faq;
+//            QueryEncyclopedia queryEncyclopedia = new QueryEncyclopedia();
+//            question = queryEncyclopedia.search(question, DbqaQueryDriver.QueryType.MATCH_PHRASE_QUERY, DataSource.ENCYCLOPEDIA);
 
-            //将question_string分词之后再查询一次;
-            Segmentation.segmentation(input);
-            List<String> tokens = Segmentation.getTokens();
-            String token_string = "";
-            for(String token : tokens)
-            {
-                token_string += token + " ";
-            }
-            token_string = token_string.trim();
-            question.setQuestionString(token_string);
-            question = queryEncyclopedia.search(question, DbqaQueryDriver.QueryType.MATCH_PHRASE_QUERY, DataSource.ENCYCLOPEDIA);
+//            //将question_string分词之后再查询一次;
+//            Segmentation.segmentation(input);
+//            List<String> tokens = Segmentation.getTokens();
+//            String token_string = "";
+//            for(String token : tokens)
+//            {
+//                token_string += token + " ";
+//            }
+//            token_string = token_string.trim();
+//            question.setQuestionString(token_string);
+//            question = queryEncyclopedia.search(question, DbqaQueryDriver.QueryType.MATCH_PHRASE_QUERY, DataSource.ENCYCLOPEDIA);
 
             //对答案进行排序
             AnswerAnalysisDriverImpl analysisDriver = new AnswerAnalysisDriverImpl();

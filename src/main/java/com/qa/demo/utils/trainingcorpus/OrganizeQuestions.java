@@ -2,11 +2,10 @@ package com.qa.demo.utils.trainingcorpus;
 
 import com.qa.demo.conf.Configuration;
 
-import java.io.BufferedWriter;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.util.ArrayList;
+
+import static com.qa.demo.conf.FileConfig.TEMPLATE_SYNONYM_REPOSITORY;
 
 /**
  *  Created time: 2017_08_26
@@ -84,6 +83,16 @@ public class OrganizeQuestions {
     //To write assembled question-answer pair into file.
     public static void writeToFile(ArrayList<String> list, String resultFilePath) throws IOException
     {
+        File file;
+        file = new File(resultFilePath);
+        //判断目标文件所在的目录是否存在
+        if(!file.getParentFile().exists()) {
+            //如果目标文件所在的目录不存在，则创建父目录
+            System.out.println("目标文件所在目录不存在，准备创建它！");
+            if(!file.getParentFile().mkdirs()) {
+                System.out.println("创建目标文件所在目录失败！");
+            }
+        }
         BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(resultFilePath,false), "UTF-8"));
         for(String value:list)
         {

@@ -33,8 +33,8 @@ public class KBQADemo {
     @Test
     public static void main(String[] args) throws IOException {
 
-        IndexFile.indexFaqData(DataSource.SYNONYM);
-        LOG.info(" [info]已建立faq索引！");
+//        IndexFile.indexFaqData(DataSource.SYNONYM);
+//        LOG.info(" [info]已建立faq索引！");
 
         TDBCrudDriver tdbCrudDriver = new TDBCrudDriverImpl();
         tdbCrudDriver.loadTDBModel();
@@ -45,7 +45,7 @@ public class KBQADemo {
 
         //取得问题集合;
         ArrayList<Question> questions = IOTool.getQuestionsFromTripletGeneratedQuestionFile();
-        KbqaQueryDriver kbqaQueryDriver = new KbqaQueryDriverImpl();
+//        KbqaQueryDriver kbqaQueryDriver = new KbqaQueryDriverImpl();
         ArrayList<String> outputs = new ArrayList<>();
         String stringtemp = "";
         int count = 0;
@@ -56,9 +56,9 @@ public class KBQADemo {
 
         for(Question q:questions) {
             count++;
-            //从ES索引的模板库中匹配模板，并形成查询三元组，最终通过KG三元组匹配得到候选答案;
-            KbqaQueryDriver esQuerySynonymKBQADriver = new ESQuerySynonymKBQA();
-            q = esQuerySynonymKBQADriver.kbQueryAnswers(q);
+//            //从ES索引的模板库中匹配模板，并形成查询三元组，最终通过KG三元组匹配得到候选答案;
+//            KbqaQueryDriver esQuerySynonymKBQADriver = new ESQuerySynonymKBQA();
+//            q = esQuerySynonymKBQADriver.kbQueryAnswers(q);
 
             KbqaQueryDriver ALGQuerySynonymKBQADriver = new ALGQuerySynonymKBQA();
             q = ALGQuerySynonymKBQADriver.kbQueryAnswers(q);
