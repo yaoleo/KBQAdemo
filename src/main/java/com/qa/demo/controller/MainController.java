@@ -35,6 +35,32 @@ import static com.qa.demo.conf.FileConfig.LOG_PROPERTY;
 @Controller
 public class MainController {
 
+
+
+    private String _runTask(Question q){
+        long beginTime=System.currentTimeMillis();
+        //任务执行准备
+        //如下为任务算法执行
+        while((System.currentTimeMillis()-beginTime<150)){
+            LOG.info(String.valueOf((System.currentTimeMillis()-beginTime)));
+            //执行循环体内的任务片段和算法
+            KbqaQueryDriver esQuerySynonymKBQADriver = new ESQuerySynonymKBQA();
+            q = esQuerySynonymKBQADriver.kbQueryAnswers(q);
+
+            KbqaQueryDriver ALGQuerySynonymKBQADriver = new ALGQuerySynonymKBQA();
+            q = ALGQuerySynonymKBQADriver.kbQueryAnswers(q);
+            // 对答案进行排序
+            AnswerAnalysisDriverImpl analysisDriver = new AnswerAnalysisDriverImpl();
+            q = analysisDriver.rankAnswerCandidate(q);
+
+            //生成答案并返回
+            q = analysisDriver.returnAnswer(q);
+            String answer = q.getReturnedAnswer().getAnswerString().trim();
+            return answer;
+        }
+        return "我还得再想想，换一个问题吧";
+    }
+
     public static final Log LOG = LogFactory.getLog(FaqDemo.class);
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
@@ -113,20 +139,21 @@ public class MainController {
             if (session_attributes.containsKey("wrongTimes")) {
                 wrongTimes = session_attributes.getString("wrongTimes");
             }else{
-                wrongTimes ="0";
+                LOG.info("9999");
+                wrongTimes ="-1";
             }
         }
 
         JSONObject attributes = new JSONObject();
 
-        if(request.containsKey("no_response")) {
-            Boolean no_response = request.getBoolean("no_response");
-            if(no_response) {
-                if (wrongTimes.equals("2")){
+        if(request.containsKey("type")) {
+            Integer type = request.getIntValue("type");
+            if(type.equals(2)) {
+                if (wrongTimes.equals("2") ||wrongTimes.equals("-1")){
                     JSONObject response = new JSONObject();
                     JSONObject to_speak = new JSONObject();
                     to_speak.put("type", 0);
-                    to_speak.put("text", "小问还是没听清,已为您退出,下次再问");
+                    to_speak.put("text", "小问已为您退出,下次再问");
 
                     response.put("to_speak", to_speak);
                     response.put("open_mic", false);
@@ -136,6 +163,7 @@ public class MainController {
                     result.put("is_session_end", true);
                     result.put("response", response);
                     System.out.println(result.toJSONString());
+                    LOG.info("8888");
                     return result.toJSONString();
                 }
                 JSONObject response = new JSONObject();
@@ -154,6 +182,7 @@ public class MainController {
                 attributes.put("wrongTimes",wrongTimes);
                 result.put("session_attributes",attributes);
                 System.out.println(result.toJSONString());
+                LOG.info("7777");
                 return result.toJSONString();
             }
         }
@@ -168,7 +197,7 @@ public class MainController {
         {
             qstring = qstring.replace(punctuation,"");
         }
-        if (qstring.equals("退出小问")){
+        if (qstring.equals("退出小问") || qstring.equals("退出")){
 
             JSONObject response = new JSONObject();
             JSONObject to_speak = new JSONObject();
@@ -186,27 +215,29 @@ public class MainController {
             attributes.put("wrongTimes",wrongTimes);
             result.put("session_attributes",attributes);
             System.out.println(result.toJSONString());
+            LOG.info("6666");
             return result.toJSONString();
         }
         if (qstring.equals("") || qstring == null){
-            if(jsonParam.containsKey("session")) {
-                if (wrongTimes.equals("2")){
-                    JSONObject response = new JSONObject();
-                    JSONObject to_speak = new JSONObject();
-                    to_speak.put("type", 0);
-                    to_speak.put("text", "小问还是没听清,已为您退出,下次再问");
 
-                    response.put("to_speak", to_speak);
-                    response.put("open_mic", false);
+            if (wrongTimes.equals("2")||wrongTimes.equals("-1")){
+                JSONObject response = new JSONObject();
+                JSONObject to_speak = new JSONObject();
+                to_speak.put("type", 0);
+                to_speak.put("text", "小问还是没听清,已为您退出,下次再问");
 
-                    JSONObject result = new JSONObject();
-                    result.put("version", "1.0");
-                    result.put("is_session_end", true);
-                    result.put("response", response);
-                    System.out.println(result.toJSONString());
-                    return result.toJSONString();
-                }
+                response.put("to_speak", to_speak);
+                response.put("open_mic", false);
+
+                JSONObject result = new JSONObject();
+                result.put("version", "1.0");
+                result.put("is_session_end", true);
+                result.put("response", response);
+                System.out.println(result.toJSONString());
+                LOG.info("5555");
+                return result.toJSONString();
             }
+
             JSONObject response = new JSONObject();
             JSONObject to_speak = new JSONObject();
             to_speak.put("type",0);
@@ -223,6 +254,7 @@ public class MainController {
             attributes.put("wrongTimes",wrongTimes);
             result.put("session_attributes",attributes);
             System.out.println(result.toJSONString());
+            LOG.info("4444");
             return result.toJSONString();
         }
         if(qstring.equals("打开小问")||qstring.equals("进入小问")) {
@@ -242,6 +274,7 @@ public class MainController {
             result.put("response", response);
             result.put("session_attributes",attributes);
             System.out.println(result.toJSONString());
+            LOG.info("3333");
             return result.toJSONString();
         }
         for(String punctuation : Configuration.PUNCTUATION_SET)
@@ -258,20 +291,11 @@ public class MainController {
         qstring = qstring.replace("让小问答一下","");
         q.setQuestionString(qstring);
 
-        KbqaQueryDriver esQuerySynonymKBQADriver = new ESQuerySynonymKBQA();
-        q = esQuerySynonymKBQADriver.kbQueryAnswers(q);
+        String answer = _runTask(q);
 
-        KbqaQueryDriver ALGQuerySynonymKBQADriver = new ALGQuerySynonymKBQA();
-        q = ALGQuerySynonymKBQADriver.kbQueryAnswers(q);
-        // 对答案进行排序
-        AnswerAnalysisDriverImpl analysisDriver = new AnswerAnalysisDriverImpl();
-        q = analysisDriver.rankAnswerCandidate(q);
-
-        //生成答案并返回
-        q = analysisDriver.returnAnswer(q);
-        String answer = q.getReturnedAnswer().getAnswerString().trim();
         System.out.println("answer:"+answer);
         if(answer.contains("我还得再想想")){
+
             if(jsonParam.containsKey("session")) {
                 if (wrongTimes.equals("2")){
                     JSONObject response = new JSONObject();
@@ -287,6 +311,7 @@ public class MainController {
                     result.put("is_session_end", true);
                     result.put("response", response);
                     System.out.println(result.toJSONString());
+                    LOG.info("2222");
                     return result.toJSONString();
                 }
             }
@@ -307,6 +332,7 @@ public class MainController {
             result.put("response", response);
             result.put("session_attributes",attributes);
             System.out.println(result.toJSONString());
+            LOG.info("1111");
             return result.toJSONString();
         }
 
@@ -325,6 +351,7 @@ public class MainController {
         attributes.put("wrongTimes",wrongTimes);
         result.put("session_attributes",attributes);
         System.out.println(result.toJSONString());
+        LOG.info("0000");
         return result.toJSONString();
     }
 
