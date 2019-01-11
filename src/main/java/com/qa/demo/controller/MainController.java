@@ -41,11 +41,11 @@ public class MainController {
         long beginTime=System.currentTimeMillis();
         //任务执行准备
         //如下为任务算法执行
-        while((System.currentTimeMillis()-beginTime<150)){
+        while((System.currentTimeMillis()-beginTime<150)){//TODO
             LOG.info(String.valueOf((System.currentTimeMillis()-beginTime)));
             //执行循环体内的任务片段和算法
-            KbqaQueryDriver esQuerySynonymKBQADriver = new ESQuerySynonymKBQA();
-            q = esQuerySynonymKBQADriver.kbQueryAnswers(q);
+//            KbqaQueryDriver esQuerySynonymKBQADriver = new ESQuerySynonymKBQA();
+//            q = esQuerySynonymKBQADriver.kbQueryAnswers(q);
 
             KbqaQueryDriver ALGQuerySynonymKBQADriver = new ALGQuerySynonymKBQA();
             q = ALGQuerySynonymKBQADriver.kbQueryAnswers(q);
