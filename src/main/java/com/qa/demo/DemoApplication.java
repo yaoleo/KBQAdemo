@@ -31,7 +31,7 @@ public class DemoApplication  extends SpringBootServletInitializer{
 //			LOG.error(" [error]发生异常！");
 //		}
 
-		LOG.info(" [info]已建立faq索引！");
+//		LOG.info(" [info]已建立faq索引！");
 		LOG.info(" [info]已建立TDB MODEL，系统初始化完成！");
 
 		SpringApplication.run(DemoApplication.class, args);

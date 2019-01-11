@@ -85,6 +85,8 @@ public class FileConfig {
     public static final String TEMPLATE_SEGMENTATION_KEYWORDS_REPOSITORY = "src\\main\\resources\\data\\templateRepository\\template_segmentation_keywords_repository.txt";
     //分词、去掉停用词之后的谓词-tokens同义词集合库；
     public static final String TEMPLATE_SYNONYM_REPOSITORY = "src\\main\\resources\\data\\templateRepository\\template_synonym_repository.txt";
+    //分词、去掉停用词之后的谓词-tokens同义词集合库的文件夹地址；
+    public static final String TEMPLATE_SYNONYM_REPOSITORY_FOLDER = "src\\main\\resources\\data\\templateRepository";
 
     //KBQA使用模板回答问题的结果文件；
     public static final String KBQA_TEMPLATE_RESULT = "src\\main\\resources\\data\\kbqa_template_result.txt";

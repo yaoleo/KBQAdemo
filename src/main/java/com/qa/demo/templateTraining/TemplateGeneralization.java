@@ -184,7 +184,17 @@ public class TemplateGeneralization {
     public void printPredicateSynonymsMappings() throws IOException {
 
         BufferedWriter out = null;
+        File file;
         try {
+            file = new File(TEMPLATE_SYNONYM_REPOSITORY);
+            //判断目标文件所在的目录是否存在
+            if(!file.getParentFile().exists()) {
+                //如果目标文件所在的目录不存在，则创建父目录
+                System.out.println("目标文件所在目录不存在，准备创建它！");
+                if(!file.getParentFile().mkdirs()) {
+                    System.out.println("创建目标文件所在目录失败！");
+                }
+            }
             out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(TEMPLATE_SYNONYM_REPOSITORY,false), "UTF-8"));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -217,7 +227,17 @@ public class TemplateGeneralization {
     public void printPredicateTemplateMappings() throws IOException {
 
         BufferedWriter out = null;
+        File file;
         try {
+            file = new File(TEMPLATE_SEGMENTATION_REPOSITORY);
+            //判断目标文件所在的目录是否存在
+            if(!file.getParentFile().exists()) {
+                //如果目标文件所在的目录不存在，则创建父目录
+                System.out.println("目标文件所在目录不存在，准备创建它！");
+                if(!file.getParentFile().mkdirs()) {
+                    System.out.println("创建目标文件所在目录失败！");
+                }
+            }
             out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(TEMPLATE_SEGMENTATION_REPOSITORY,false), "UTF-8"));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -257,7 +277,17 @@ public class TemplateGeneralization {
     public void printPredicateTemplateSegmentationMappings() throws IOException {
 
         BufferedWriter out = null;
+        File file;
         try {
+            file = new File(TEMPLATE_SEGMENTATION_KEYWORDS_REPOSITORY);
+            //判断目标文件所在的目录是否存在
+            if(!file.getParentFile().exists()) {
+                //如果目标文件所在的目录不存在，则创建父目录
+                System.out.println("目标文件所在目录不存在，准备创建它！");
+                if(!file.getParentFile().mkdirs()) {
+                    System.out.println("创建目标文件所在目录失败！");
+                }
+            }
             out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(TEMPLATE_SEGMENTATION_KEYWORDS_REPOSITORY,false), "UTF-8"));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();

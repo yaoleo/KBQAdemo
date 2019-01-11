@@ -1,14 +1,10 @@
 package com.qa.demo.query;
 
-import com.qa.demo.conf.Configuration;
 import com.qa.demo.dataStructure.*;
 import com.qa.demo.questionAnalysis.QuestionAnalysisDriver;
 import com.qa.demo.questionAnalysis.QuestionAnalysisDriverImpl;
 import com.qa.demo.templateTraining.TemplateGeneralization;
-import org.elasticsearch.action.search.SearchResponse;
-import org.elasticsearch.search.SearchHit;
 
-import java.net.UnknownHostException;
 import java.util.*;
 
 /**
